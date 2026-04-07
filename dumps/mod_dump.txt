@@ -1,0 +1,635 @@
+   9b2fc:	e8 df 2f 00 00       	call   9e2e0 <mpihelp_divrem>
+   9b301:	48 85 ed             	test   %rbp,%rbp
+   9b304:	74 23                	je     9b329 <mpi_tdiv_qr+0x1f9>
+   9b306:	41 29 dd             	sub    %ebx,%r13d
+   9b309:	48 85 c0             	test   %rax,%rax
+   9b30c:	74 10                	je     9b31e <mpi_tdiv_qr+0x1ee>
+   9b30e:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+   9b313:	49 63 d5             	movslq %r13d,%rdx
+   9b316:	41 83 c5 01          	add    $0x1,%r13d
+   9b31a:	48 89 04 d7          	mov    %rax,(%rdi,%rdx,8)
+   9b31e:	8b 44 24 38          	mov    0x38(%rsp),%eax
+   9b322:	44 89 6d 04          	mov    %r13d,0x4(%rbp)
+   9b326:	89 45 0c             	mov    %eax,0xc(%rbp)
+   9b329:	85 db                	test   %ebx,%ebx
+   9b32b:	7e 23                	jle    9b350 <mpi_tdiv_qr+0x220>
+   9b32d:	48 8b 44 24 20       	mov    0x20(%rsp),%rax
+   9b332:	49 8d 04 c6          	lea    (%r14,%rax,8),%rax
+   9b336:	eb 11                	jmp    9b349 <mpi_tdiv_qr+0x219>
+   9b338:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+   9b33f:	00 
+   9b340:	48 83 e8 08          	sub    $0x8,%rax
+   9b344:	83 eb 01             	sub    $0x1,%ebx
+   9b347:	74 33                	je     9b37c <mpi_tdiv_qr+0x24c>
+   9b349:	48 83 78 f8 00       	cmpq   $0x0,-0x8(%rax)
+   9b34e:	74 f0                	je     9b340 <mpi_tdiv_qr+0x210>
+   9b350:	8b 44 24 1c          	mov    0x1c(%rsp),%eax
+   9b354:	85 c0                	test   %eax,%eax
+   9b356:	74 24                	je     9b37c <mpi_tdiv_qr+0x24c>
+   9b358:	85 db                	test   %ebx,%ebx
+   9b35a:	74 20                	je     9b37c <mpi_tdiv_qr+0x24c>
+   9b35c:	89 da                	mov    %ebx,%edx
+   9b35e:	89 c1                	mov    %eax,%ecx
+   9b360:	4c 89 f6             	mov    %r14,%rsi
+   9b363:	4c 89 f7             	mov    %r14,%rdi
+   9b366:	e8 05 56 00 00       	call   a0970 <mpihelp_rshift>
+   9b36b:	48 63 c3             	movslq %ebx,%rax
+   9b36e:	49 83 7c c6 f8 00    	cmpq   $0x0,-0x8(%r14,%rax,8)
+   9b374:	0f 94 c0             	sete   %al
+   9b377:	0f b6 c0             	movzbl %al,%eax
+   9b37a:	29 c3                	sub    %eax,%ebx
+   9b37c:	8b 44 24 18          	mov    0x18(%rsp),%eax
+   9b380:	41 89 5c 24 04       	mov    %ebx,0x4(%r12)
+   9b385:	41 89 44 24 0c       	mov    %eax,0xc(%r12)
+   9b38a:	45 85 ff             	test   %r15d,%r15d
+   9b38d:	74 16                	je     9b3a5 <mpi_tdiv_qr+0x275>
+   9b38f:	41 83 ef 01          	sub    $0x1,%r15d
+   9b393:	49 63 c7             	movslq %r15d,%rax
+   9b396:	48 8b 7c c4 40       	mov    0x40(%rsp,%rax,8),%rdi
+   9b39b:	e8 50 4d 00 00       	call   a00f0 <mpi_free_limb_space>
+   9b3a0:	45 85 ff             	test   %r15d,%r15d
+   9b3a3:	75 ea                	jne    9b38f <mpi_tdiv_qr+0x25f>
+   9b3a5:	48 8b 44 24 68       	mov    0x68(%rsp),%rax
+   9b3aa:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
+   9b3b1:	00 00 
+   9b3b3:	0f 85 63 02 00 00    	jne    9b61c <mpi_tdiv_qr+0x4ec>
+   9b3b9:	48 83 c4 78          	add    $0x78,%rsp
+   9b3bd:	5b                   	pop    %rbx
+   9b3be:	5d                   	pop    %rbp
+   9b3bf:	41 5c                	pop    %r12
+   9b3c1:	41 5d                	pop    %r13
+   9b3c3:	41 5e                	pop    %r14
+   9b3c5:	41 5f                	pop    %r15
+   9b3c7:	c3                   	ret
+   9b3c8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+   9b3cf:	00 
+   9b3d0:	4d 8b 4e 18          	mov    0x18(%r14),%r9
+   9b3d4:	4d 8b 50 18          	mov    0x18(%r8),%r10
+   9b3d8:	4d 8b 74 24 18       	mov    0x18(%r12),%r14
+   9b3dd:	83 fb 01             	cmp    $0x1,%ebx
+   9b3e0:	0f 84 13 02 00 00    	je     9b5f9 <mpi_tdiv_qr+0x4c9>
+   9b3e6:	48 63 c3             	movslq %ebx,%rax
+   9b3e9:	4c 8d 3c c5 00 00 00 	lea    0x0(,%rax,8),%r15
+   9b3f0:	00 
+   9b3f1:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+   9b3f6:	4b 8d 04 3e          	lea    (%r14,%r15,1),%rax
+   9b3fa:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
+   9b3ff:	e9 0a fe ff ff       	jmp    9b20e <mpi_tdiv_qr+0xde>
+   9b404:	0f 1f 40 00          	nopl   0x0(%rax)
+   9b408:	4d 39 e6             	cmp    %r12,%r14
+   9b40b:	74 3f                	je     9b44c <mpi_tdiv_qr+0x31c>
+   9b40d:	41 8b 46 04          	mov    0x4(%r14),%eax
+   9b411:	41 89 44 24 04       	mov    %eax,0x4(%r12)
+   9b416:	41 8b 46 0c          	mov    0xc(%r14),%eax
+   9b41a:	41 89 44 24 0c       	mov    %eax,0xc(%r12)
+   9b41f:	45 85 ed             	test   %r13d,%r13d
+   9b422:	7e 28                	jle    9b44c <mpi_tdiv_qr+0x31c>
+   9b424:	49 8b 7e 18          	mov    0x18(%r14),%rdi
+   9b428:	49 8b 74 24 18       	mov    0x18(%r12),%rsi
+   9b42d:	41 8d 4d ff          	lea    -0x1(%r13),%ecx
+   9b431:	31 c0                	xor    %eax,%eax
+   9b433:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   9b438:	48 8b 14 c7          	mov    (%rdi,%rax,8),%rdx
+   9b43c:	48 89 14 c6          	mov    %rdx,(%rsi,%rax,8)
+   9b440:	48 89 c2             	mov    %rax,%rdx
+   9b443:	48 83 c0 01          	add    $0x1,%rax
+   9b447:	48 39 d1             	cmp    %rdx,%rcx
+   9b44a:	75 ec                	jne    9b438 <mpi_tdiv_qr+0x308>
+   9b44c:	48 85 ed             	test   %rbp,%rbp
+   9b44f:	0f 84 50 ff ff ff    	je     9b3a5 <mpi_tdiv_qr+0x275>
+   9b455:	c7 45 04 00 00 00 00 	movl   $0x0,0x4(%rbp)
+   9b45c:	c7 45 0c 00 00 00 00 	movl   $0x0,0xc(%rbp)
+--
+   9c8c3:	e8 18 1a 00 00       	call   9e2e0 <mpihelp_divrem>
+   9c8c8:	48 85 ed             	test   %rbp,%rbp
+   9c8cb:	79 ab                	jns    9c878 <mpi_powm+0x388>
+   9c8cd:	44 8b 44 24 10       	mov    0x10(%rsp),%r8d
+   9c8d2:	41 83 f8 0f          	cmp    $0xf,%r8d
+   9c8d6:	0f 8f a4 00 00 00    	jg     9c980 <mpi_powm+0x490>
+   9c8dc:	48 8b 4c 24 30       	mov    0x30(%rsp),%rcx
+   9c8e1:	44 89 ea             	mov    %r13d,%edx
+   9c8e4:	4c 89 e6             	mov    %r12,%rsi
+   9c8e7:	4c 89 f7             	mov    %r14,%rdi
+   9c8ea:	e8 11 31 00 00       	call   9fa00 <mpihelp_mul>
+   9c8ef:	44 03 6c 24 10       	add    0x10(%rsp),%r13d
+   9c8f4:	45 39 ef             	cmp    %r13d,%r15d
+   9c8f7:	0f 8c ae 00 00 00    	jl     9c9ab <mpi_powm+0x4bb>
+   9c8fd:	4c 89 e0             	mov    %r12,%rax
+   9c900:	4d 89 f4             	mov    %r14,%r12
+   9c903:	49 89 c6             	mov    %rax,%r14
+   9c906:	e9 6d ff ff ff       	jmp    9c878 <mpi_powm+0x388>
+   9c90b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   9c910:	49 8b 45 18          	mov    0x18(%r13),%rax
+   9c914:	48 83 38 01          	cmpq   $0x1,(%rax)
+   9c918:	0f 95 c0             	setne  %al
+   9c91b:	0f b6 c0             	movzbl %al,%eax
+   9c91e:	e9 9e fc ff ff       	jmp    9c5c1 <mpi_powm+0xd1>
+   9c923:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   9c928:	48 3b 6c 24 20       	cmp    0x20(%rsp),%rbp
+   9c92d:	0f 94 c2             	sete   %dl
+   9c930:	48 3b 6c 24 28       	cmp    0x28(%rsp),%rbp
+   9c935:	0f 94 c0             	sete   %al
+   9c938:	08 c2                	or     %al,%dl
+   9c93a:	0f 85 50 04 00 00    	jne    9cd90 <mpi_powm+0x8a0>
+   9c940:	48 3b 6c 24 30       	cmp    0x30(%rsp),%rbp
+   9c945:	0f 84 45 04 00 00    	je     9cd90 <mpi_powm+0x8a0>
+   9c94b:	48 8b 6c 24 18       	mov    0x18(%rsp),%rbp
+   9c950:	8b 74 24 64          	mov    0x64(%rsp),%esi
+   9c954:	48 89 ef             	mov    %rbp,%rdi
+   9c957:	e8 14 38 00 00       	call   a0170 <mpi_resize>
+   9c95c:	c7 44 24 74 00 00 00 	movl   $0x0,0x74(%rsp)
+   9c963:	00 
+   9c964:	48 8b 6d 18          	mov    0x18(%rbp),%rbp
+   9c968:	48 c7 44 24 68 00 00 	movq   $0x0,0x68(%rsp)
+   9c96f:	00 00 
+   9c971:	e9 a2 fd ff ff       	jmp    9c718 <mpi_powm+0x228>
+   9c976:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+   9c97d:	00 00 00 
+   9c980:	4c 8b 4c 24 58       	mov    0x58(%rsp),%r9
+   9c985:	44 8b 44 24 10       	mov    0x10(%rsp),%r8d
+   9c98a:	44 89 ea             	mov    %r13d,%edx
+   9c98d:	4c 89 e6             	mov    %r12,%rsi
+   9c990:	48 8b 4c 24 30       	mov    0x30(%rsp),%rcx
+   9c995:	4c 89 f7             	mov    %r14,%rdi
+   9c998:	e8 23 32 00 00       	call   9fbc0 <mpihelp_mul_karatsuba_case>
+   9c99d:	44 03 6c 24 10       	add    0x10(%rsp),%r13d
+   9c9a2:	45 39 ef             	cmp    %r13d,%r15d
+   9c9a5:	0f 8d 52 ff ff ff    	jge    9c8fd <mpi_powm+0x40d>
+   9c9ab:	48 8b 44 24 38       	mov    0x38(%rsp),%rax
+   9c9b0:	4c 8b 44 24 28       	mov    0x28(%rsp),%r8
+   9c9b5:	44 89 e9             	mov    %r13d,%ecx
+   9c9b8:	4c 89 f2             	mov    %r14,%rdx
+   9c9bb:	45 89 f9             	mov    %r15d,%r9d
+   9c9be:	31 f6                	xor    %esi,%esi
+   9c9c0:	45 89 fd             	mov    %r15d,%r13d
+   9c9c3:	49 8d 3c 06          	lea    (%r14,%rax,1),%rdi
+   9c9c7:	e8 14 19 00 00       	call   9e2e0 <mpihelp_divrem>
+   9c9cc:	4c 89 e0             	mov    %r12,%rax
+   9c9cf:	4d 89 f4             	mov    %r14,%r12
+   9c9d2:	49 89 c6             	mov    %rax,%r14
+   9c9d5:	e9 9e fe ff ff       	jmp    9c878 <mpi_powm+0x388>
+   9c9da:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+   9c9e0:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+   9c9e5:	89 54 24 70          	mov    %edx,0x70(%rsp)
+   9c9e9:	e8 02 37 00 00       	call   a00f0 <mpi_free_limb_space>
+   9c9ee:	31 f6                	xor    %esi,%esi
+   9c9f0:	44 89 ef             	mov    %r13d,%edi
+   9c9f3:	e8 88 35 00 00       	call   9ff80 <mpi_alloc_limb_space>
+   9c9f8:	44 89 6c 24 48       	mov    %r13d,0x48(%rsp)
+   9c9fd:	8b 54 24 70          	mov    0x70(%rsp),%edx
+   9ca01:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
+   9ca06:	e9 53 fe ff ff       	jmp    9c85e <mpi_powm+0x36e>
+   9ca0b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   9ca10:	89 54 24 70          	mov    %edx,0x70(%rsp)
+   9ca14:	eb d8                	jmp    9c9ee <mpi_powm+0x4fe>
+   9ca16:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+   9ca1d:	00 00 00 
+   9ca20:	48 8b 44 24 18       	mov    0x18(%rsp),%rax
+   9ca25:	8b 4c 24 60          	mov    0x60(%rsp),%ecx
+   9ca29:	4c 89 f5             	mov    %r14,%rbp
+   9ca2c:	41 89 d4             	mov    %edx,%r12d
+   9ca2f:	4c 8b 68 18          	mov    0x18(%rax),%r13
+   9ca33:	85 c9                	test   %ecx,%ecx
+   9ca35:	0f 85 05 03 00 00    	jne    9cd40 <mpi_powm+0x850>
+   9ca3b:	8d 4a ff             	lea    -0x1(%rdx),%ecx
+   9ca3e:	31 c0                	xor    %eax,%eax
+   9ca40:	85 d2                	test   %edx,%edx
+   9ca42:	7e 1a                	jle    9ca5e <mpi_powm+0x56e>
+   9ca44:	0f 1f 40 00          	nopl   0x0(%rax)
+   9ca48:	48 8b 54 c5 00       	mov    0x0(%rbp,%rax,8),%rdx
+   9ca4d:	49 89 54 c5 00       	mov    %rdx,0x0(%r13,%rax,8)
+   9ca52:	48 89 c2             	mov    %rax,%rdx
+   9ca55:	48 83 c0 01          	add    $0x1,%rax
+   9ca59:	48 39 d1             	cmp    %rdx,%rcx
+   9ca5c:	75 ea                	jne    9ca48 <mpi_powm+0x558>
+   9ca5e:	45 39 fc             	cmp    %r15d,%r12d
+   9ca61:	0f 8d b9 03 00 00    	jge    9ce20 <mpi_powm+0x930>
+   9ca67:	49 63 c4             	movslq %r12d,%rax
+   9ca6a:	49 8d 44 c5 00       	lea    0x0(%r13,%rax,8),%rax
+   9ca6f:	45 85 e4             	test   %r12d,%r12d
+   9ca72:	7f 1a                	jg     9ca8e <mpi_powm+0x59e>
+   9ca74:	eb 1f                	jmp    9ca95 <mpi_powm+0x5a5>
+   9ca76:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+   9ca7d:	00 00 00 
+   9ca80:	48 83 e8 08          	sub    $0x8,%rax
+   9ca84:	41 83 ec 01          	sub    $0x1,%r12d
+   9ca88:	0f 84 82 02 00 00    	je     9cd10 <mpi_powm+0x820>
+   9ca8e:	48 83 78 f8 00       	cmpq   $0x0,-0x8(%rax)
+   9ca93:	74 eb                	je     9ca80 <mpi_powm+0x590>
+   9ca95:	48 8b 7c 24 58       	mov    0x58(%rsp),%rdi
+   9ca9a:	e8 f1 2e 00 00       	call   9f990 <mpihelp_release_karatsuba_ctx>
+   9ca9f:	45 85 e4             	test   %r12d,%r12d
+   9caa2:	0f 84 ec 04 00 00    	je     9cf94 <mpi_powm+0xaa4>
+   9caa8:	80 7c 24 7f 00       	cmpb   $0x0,0x7f(%rsp)
+   9caad:	0f 84 e1 04 00 00    	je     9cf94 <mpi_powm+0xaa4>
+   9cab3:	8b 54 24 60          	mov    0x60(%rsp),%edx
+   9cab7:	85 d2                	test   %edx,%edx
+   9cab9:	0f 85 88 03 00 00    	jne    9ce47 <mpi_powm+0x957>
+   9cabf:	48 8b 74 24 28       	mov    0x28(%rsp),%rsi
+   9cac4:	44 89 e1             	mov    %r12d,%ecx
+   9cac7:	4c 89 ea             	mov    %r13,%rdx
+   9caca:	4c 89 ef             	mov    %r13,%rdi
+   9cacd:	e8 ee 3d 00 00       	call   a08c0 <mpihelp_sub_n>
+   9cad2:	45 39 e7             	cmp    %r12d,%r15d
+   9cad5:	74 62                	je     9cb39 <mpi_powm+0x649>
+   9cad7:	48 8b 5c 24 28       	mov    0x28(%rsp),%rbx
+   9cadc:	49 63 fc             	movslq %r12d,%rdi
+   9cadf:	44 89 fe             	mov    %r15d,%esi
+   9cae2:	48 c1 e7 03          	shl    $0x3,%rdi
+   9cae6:	44 29 e6             	sub    %r12d,%esi
+   9cae9:	48 8d 0c 3b          	lea    (%rbx,%rdi,1),%rcx
+   9caed:	4c 01 ef             	add    %r13,%rdi
+   9caf0:	48 8d 51 08          	lea    0x8(%rcx),%rdx
+   9caf4:	48 8b 09             	mov    (%rcx),%rcx
+   9caf7:	49 89 c8             	mov    %rcx,%r8
+   9cafa:	48 8d 4f 08          	lea    0x8(%rdi),%rcx
+   9cafe:	49 29 c0             	sub    %rax,%r8
+   9cb01:	0f 92 c0             	setb   %al
+   9cb04:	4c 89 07             	mov    %r8,(%rdi)
+   9cb07:	0f b6 c0             	movzbl %al,%eax
+   9cb0a:	48 85 c0             	test   %rax,%rax
+   9cb0d:	75 25                	jne    9cb34 <mpi_powm+0x644>
+   9cb0f:	e9 b8 02 00 00       	jmp    9cdcc <mpi_powm+0x8dc>
+   9cb14:	0f 1f 40 00          	nopl   0x0(%rax)
+   9cb18:	48 8b 02             	mov    (%rdx),%rax
+   9cb1b:	48 83 c1 08          	add    $0x8,%rcx
+   9cb1f:	48 83 c2 08          	add    $0x8,%rdx
+   9cb23:	48 8d 78 ff          	lea    -0x1(%rax),%rdi
+   9cb27:	48 89 79 f8          	mov    %rdi,-0x8(%rcx)
+   9cb2b:	48 85 c0             	test   %rax,%rax
+   9cb2e:	0f 85 98 02 00 00    	jne    9cdcc <mpi_powm+0x8dc>
+   9cb34:	83 ee 01             	sub    $0x1,%esi
+   9cb37:	75 df                	jne    9cb18 <mpi_powm+0x628>
+   9cb39:	48 8b 44 24 38       	mov    0x38(%rsp),%rax
+   9cb3e:	4c 01 e8             	add    %r13,%rax
+   9cb41:	45 85 ff             	test   %r15d,%r15d
+   9cb44:	7f 14                	jg     9cb5a <mpi_powm+0x66a>
+--
+   9cc8c:	e8 4f 16 00 00       	call   9e2e0 <mpihelp_divrem>
+   9cc91:	45 85 ff             	test   %r15d,%r15d
+   9cc94:	48 8b 54 24 40       	mov    0x40(%rsp),%rdx
+   9cc99:	4c 8b 54 24 30       	mov    0x30(%rsp),%r10
+   9cc9e:	7f 19                	jg     9ccb9 <mpi_powm+0x7c9>
+   9cca0:	e9 ff 02 00 00       	jmp    9cfa4 <mpi_powm+0xab4>
+   9cca5:	0f 1f 00             	nopl   (%rax)
+   9cca8:	41 8d 42 ff          	lea    -0x1(%r10),%eax
+   9ccac:	49 83 ea 01          	sub    $0x1,%r10
+   9ccb0:	45 85 d2             	test   %r10d,%r10d
+   9ccb3:	0f 8e 4f 01 00 00    	jle    9ce08 <mpi_powm+0x918>
+   9ccb9:	4a 83 7c d2 f8 00    	cmpq   $0x0,-0x8(%rdx,%r10,8)
+   9ccbf:	74 e7                	je     9cca8 <mpi_powm+0x7b8>
+   9ccc1:	48 8b 44 24 40       	mov    0x40(%rsp),%rax
+   9ccc6:	44 89 54 24 10       	mov    %r10d,0x10(%rsp)
+   9cccb:	48 89 44 24 30       	mov    %rax,0x30(%rsp)
+   9ccd0:	e9 fc f9 ff ff       	jmp    9c6d1 <mpi_powm+0x1e1>
+   9ccd5:	0f 1f 00             	nopl   (%rax)
+   9ccd8:	8b 4c 24 60          	mov    0x60(%rsp),%ecx
+   9ccdc:	48 8b 7c 24 28       	mov    0x28(%rsp),%rdi
+   9cce1:	44 89 fa             	mov    %r15d,%edx
+   9cce4:	4c 89 54 24 10       	mov    %r10,0x10(%rsp)
+   9cce9:	e8 12 3c 00 00       	call   a0900 <mpihelp_lshift>
+   9ccee:	4c 8b 54 24 10       	mov    0x10(%rsp),%r10
+   9ccf3:	e9 a4 f9 ff ff       	jmp    9c69c <mpi_powm+0x1ac>
+   9ccf8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+   9ccff:	00 
+   9cd00:	8b 73 0c             	mov    0xc(%rbx),%esi
+   9cd03:	85 f6                	test   %esi,%esi
+   9cd05:	0f 95 44 24 7f       	setne  0x7f(%rsp)
+   9cd0a:	e9 7d fa ff ff       	jmp    9c78c <mpi_powm+0x29c>
+   9cd0f:	90                   	nop
+   9cd10:	48 8b 7c 24 58       	mov    0x58(%rsp),%rdi
+   9cd15:	45 31 ff             	xor    %r15d,%r15d
+   9cd18:	e8 73 2c 00 00       	call   9f990 <mpihelp_release_karatsuba_ctx>
+   9cd1d:	8b 44 24 78          	mov    0x78(%rsp),%eax
+   9cd21:	89 44 24 4c          	mov    %eax,0x4c(%rsp)
+   9cd25:	e9 37 fe ff ff       	jmp    9cb61 <mpi_powm+0x671>
+   9cd2a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+   9cd30:	b9 40 00 00 00       	mov    $0x40,%ecx
+   9cd35:	48 89 c2             	mov    %rax,%rdx
+   9cd38:	29 f9                	sub    %edi,%ecx
+   9cd3a:	e9 1c f9 ff ff       	jmp    9c65b <mpi_powm+0x16b>
+   9cd3f:	90                   	nop
+   9cd40:	8b 4c 24 60          	mov    0x60(%rsp),%ecx
+   9cd44:	4c 89 ef             	mov    %r13,%rdi
+   9cd47:	4c 89 f6             	mov    %r14,%rsi
+   9cd4a:	e8 b1 3b 00 00       	call   a0900 <mpihelp_lshift>
+   9cd4f:	48 8b 5c 24 18       	mov    0x18(%rsp),%rbx
+   9cd54:	4c 8b 6b 18          	mov    0x18(%rbx),%r13
+   9cd58:	48 85 c0             	test   %rax,%rax
+   9cd5b:	74 0c                	je     9cd69 <mpi_powm+0x879>
+   9cd5d:	49 63 d4             	movslq %r12d,%rdx
+   9cd60:	41 83 c4 01          	add    $0x1,%r12d
+   9cd64:	49 89 44 d5 00       	mov    %rax,0x0(%r13,%rdx,8)
+   9cd69:	45 39 e7             	cmp    %r12d,%r15d
+   9cd6c:	0f 8e ad 01 00 00    	jle    9cf1f <mpi_powm+0xa2f>
+   9cd72:	8b 4c 24 60          	mov    0x60(%rsp),%ecx
+   9cd76:	44 89 e2             	mov    %r12d,%edx
+   9cd79:	4c 89 ee             	mov    %r13,%rsi
+   9cd7c:	4c 89 ef             	mov    %r13,%rdi
+   9cd7f:	e8 ec 3b 00 00       	call   a0970 <mpihelp_rshift>
+   9cd84:	e9 de fc ff ff       	jmp    9ca67 <mpi_powm+0x577>
+   9cd89:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+   9cd90:	8b 74 24 48          	mov    0x48(%rsp),%esi
+   9cd94:	8b 7c 24 64          	mov    0x64(%rsp),%edi
+   9cd98:	e8 e3 31 00 00       	call   9ff80 <mpi_alloc_limb_space>
+   9cd9d:	c7 44 24 74 01 00 00 	movl   $0x1,0x74(%rsp)
+   9cda4:	00 
+   9cda5:	48 c7 44 24 68 00 00 	movq   $0x0,0x68(%rsp)
+   9cdac:	00 00 
+   9cdae:	48 89 c5             	mov    %rax,%rbp
+   9cdb1:	e9 62 f9 ff ff       	jmp    9c718 <mpi_powm+0x228>
+   9cdb6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+   9cdbd:	00 00 00 
+   9cdc0:	b9 40 00 00 00       	mov    $0x40,%ecx
+   9cdc5:	29 d1                	sub    %edx,%ecx
+   9cdc7:	e9 02 fa ff ff       	jmp    9c7ce <mpi_powm+0x2de>
+   9cdcc:	48 39 d1             	cmp    %rdx,%rcx
+   9cdcf:	0f 84 64 fd ff ff    	je     9cb39 <mpi_powm+0x649>
+   9cdd5:	83 fe 01             	cmp    $0x1,%esi
+   9cdd8:	0f 8e 5b fd ff ff    	jle    9cb39 <mpi_powm+0x649>
+   9cdde:	8d 7e fe             	lea    -0x2(%rsi),%edi
+   9cde1:	31 c0                	xor    %eax,%eax
+   9cde3:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   9cde8:	48 8b 34 c2          	mov    (%rdx,%rax,8),%rsi
+   9cdec:	48 89 34 c1          	mov    %rsi,(%rcx,%rax,8)
+   9cdf0:	48 89 c6             	mov    %rax,%rsi
+   9cdf3:	48 83 c0 01          	add    $0x1,%rax
+   9cdf7:	48 39 f7             	cmp    %rsi,%rdi
+   9cdfa:	75 ec                	jne    9cde8 <mpi_powm+0x8f8>
+   9cdfc:	e9 38 fd ff ff       	jmp    9cb39 <mpi_powm+0x649>
+   9ce01:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+   9ce08:	89 44 24 10          	mov    %eax,0x10(%rsp)
+   9ce0c:	48 8b 44 24 40       	mov    0x40(%rsp),%rax
+   9ce11:	48 89 44 24 30       	mov    %rax,0x30(%rsp)
+   9ce16:	e9 aa f8 ff ff       	jmp    9c6c5 <mpi_powm+0x1d5>
+   9ce1b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   9ce20:	48 8b 44 24 38       	mov    0x38(%rsp),%rax
+   9ce25:	4c 8b 44 24 28       	mov    0x28(%rsp),%r8
+   9ce2a:	44 89 e1             	mov    %r12d,%ecx
+--
+   9ce3d:	e8 9e 14 00 00       	call   9e2e0 <mpihelp_divrem>
+   9ce42:	e9 20 fc ff ff       	jmp    9ca67 <mpi_powm+0x577>
+   9ce47:	48 8b 74 24 28       	mov    0x28(%rsp),%rsi
+   9ce4c:	8b 4c 24 60          	mov    0x60(%rsp),%ecx
+   9ce50:	44 89 fa             	mov    %r15d,%edx
+   9ce53:	48 89 f7             	mov    %rsi,%rdi
+   9ce56:	e8 15 3b 00 00       	call   a0970 <mpihelp_rshift>
+   9ce5b:	e9 5f fc ff ff       	jmp    9cabf <mpi_powm+0x5cf>
+   9ce60:	48 83 7c 24 40 00    	cmpq   $0x0,0x40(%rsp)
+   9ce66:	0f 85 7a 01 00 00    	jne    9cfe6 <mpi_powm+0xaf6>
+   9ce6c:	44 8b 64 24 10       	mov    0x10(%rsp),%r12d
+   9ce71:	8b 74 24 08          	mov    0x8(%rsp),%esi
+   9ce75:	44 89 e7             	mov    %r12d,%edi
+   9ce78:	e8 03 31 00 00       	call   9ff80 <mpi_alloc_limb_space>
+   9ce7d:	48 89 44 24 40       	mov    %rax,0x40(%rsp)
+   9ce82:	48 89 c7             	mov    %rax,%rdi
+   9ce85:	45 85 e4             	test   %r12d,%r12d
+   9ce88:	7e 2a                	jle    9ceb4 <mpi_powm+0x9c4>
+   9ce8a:	48 8b 74 24 30       	mov    0x30(%rsp),%rsi
+   9ce8f:	41 8d 4c 24 ff       	lea    -0x1(%r12),%ecx
+   9ce94:	31 c0                	xor    %eax,%eax
+   9ce96:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+   9ce9d:	00 00 00 
+   9cea0:	48 8b 14 c6          	mov    (%rsi,%rax,8),%rdx
+   9cea4:	48 89 14 c7          	mov    %rdx,(%rdi,%rax,8)
+   9cea8:	48 89 c2             	mov    %rax,%rdx
+   9ceab:	48 83 c0 01          	add    $0x1,%rax
+   9ceaf:	48 39 d1             	cmp    %rdx,%rcx
+   9ceb2:	75 ec                	jne    9cea0 <mpi_powm+0x9b0>
+   9ceb4:	48 8b 44 24 40       	mov    0x40(%rsp),%rax
+   9ceb9:	48 89 44 24 30       	mov    %rax,0x30(%rsp)
+   9cebe:	e9 2e f8 ff ff       	jmp    9c6f1 <mpi_powm+0x201>
+   9cec3:	48 85 ed             	test   %rbp,%rbp
+   9cec6:	0f 85 fb 00 00 00    	jne    9cfc7 <mpi_powm+0xad7>
+   9cecc:	44 89 f6             	mov    %r14d,%esi
+   9cecf:	44 89 ff             	mov    %r15d,%edi
+   9ced2:	e8 a9 30 00 00       	call   9ff80 <mpi_alloc_limb_space>
+   9ced7:	45 85 ff             	test   %r15d,%r15d
+   9ceda:	0f 8e d8 00 00 00    	jle    9cfb8 <mpi_powm+0xac8>
+   9cee0:	41 8d 77 ff          	lea    -0x1(%r15),%esi
+   9cee4:	31 d2                	xor    %edx,%edx
+   9cee6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+   9ceed:	00 00 00 
+   9cef0:	48 8b 0c d5 00 00 00 	mov    0x0(,%rdx,8),%rcx
+   9cef7:	00 
+   9cef8:	48 89 0c d0          	mov    %rcx,(%rax,%rdx,8)
+   9cefc:	48 89 d1             	mov    %rdx,%rcx
+   9ceff:	48 83 c2 01          	add    $0x1,%rdx
+   9cf03:	48 39 ce             	cmp    %rcx,%rsi
+   9cf06:	75 e8                	jne    9cef0 <mpi_powm+0xa00>
+   9cf08:	48 8b 6c 24 28       	mov    0x28(%rsp),%rbp
+   9cf0d:	c7 44 24 74 00 00 00 	movl   $0x0,0x74(%rsp)
+   9cf14:	00 
+   9cf15:	48 89 44 24 28       	mov    %rax,0x28(%rsp)
+   9cf1a:	e9 f9 f7 ff ff       	jmp    9c718 <mpi_powm+0x228>
+   9cf1f:	48 8b 44 24 38       	mov    0x38(%rsp),%rax
+   9cf24:	4c 8b 44 24 28       	mov    0x28(%rsp),%r8
+   9cf29:	44 89 e1             	mov    %r12d,%ecx
+   9cf2c:	45 89 f9             	mov    %r15d,%r9d
+   9cf2f:	4c 89 ea             	mov    %r13,%rdx
+   9cf32:	31 f6                	xor    %esi,%esi
+   9cf34:	45 89 fc             	mov    %r15d,%r12d
+   9cf37:	49 8d 7c 05 00       	lea    0x0(%r13,%rax,1),%rdi
+   9cf3c:	e8 9f 13 00 00       	call   9e2e0 <mpihelp_divrem>
+   9cf41:	e9 2c fe ff ff       	jmp    9cd72 <mpi_powm+0x882>
+   9cf46:	8b 74 24 50          	mov    0x50(%rsp),%esi
+   9cf4a:	44 8b 64 24 04       	mov    0x4(%rsp),%r12d
+   9cf4f:	83 e6 01             	and    $0x1,%esi
+   9cf52:	44 89 e7             	mov    %r12d,%edi
+   9cf55:	e8 26 30 00 00       	call   9ff80 <mpi_alloc_limb_space>
+   9cf5a:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+   9cf5f:	48 89 c6             	mov    %rax,%rsi
+   9cf62:	45 85 e4             	test   %r12d,%r12d
+   9cf65:	7e 1e                	jle    9cf85 <mpi_powm+0xa95>
+   9cf67:	41 8d 4c 24 ff       	lea    -0x1(%r12),%ecx
+   9cf6c:	31 c0                	xor    %eax,%eax
+   9cf6e:	66 90                	xchg   %ax,%ax
+   9cf70:	48 8b 54 c5 00       	mov    0x0(%rbp,%rax,8),%rdx
+   9cf75:	48 89 14 c6          	mov    %rdx,(%rsi,%rax,8)
+   9cf79:	48 89 c2             	mov    %rax,%rdx
+   9cf7c:	48 83 c0 01          	add    $0x1,%rax
+   9cf80:	48 39 d1             	cmp    %rdx,%rcx
+   9cf83:	75 eb                	jne    9cf70 <mpi_powm+0xa80>
+   9cf85:	48 8b 44 24 20       	mov    0x20(%rsp),%rax
+   9cf8a:	48 89 44 24 68       	mov    %rax,0x68(%rsp)
+   9cf8f:	e9 71 f7 ff ff       	jmp    9c705 <mpi_powm+0x215>
+   9cf94:	8b 44 24 78          	mov    0x78(%rsp),%eax
+   9cf98:	45 89 e7             	mov    %r12d,%r15d
+   9cf9b:	89 44 24 4c          	mov    %eax,0x4c(%rsp)
+   9cf9f:	e9 bd fb ff ff       	jmp    9cb61 <mpi_powm+0x671>
+   9cfa4:	48 8b 44 24 40       	mov    0x40(%rsp),%rax
+   9cfa9:	44 89 7c 24 10       	mov    %r15d,0x10(%rsp)
+   9cfae:	48 89 44 24 30       	mov    %rax,0x30(%rsp)
+   9cfb3:	e9 19 f7 ff ff       	jmp    9c6d1 <mpi_powm+0x1e1>
+   9cfb8:	48 89 44 24 28       	mov    %rax,0x28(%rsp)
+   9cfbd:	e9 56 f7 ff ff       	jmp    9c718 <mpi_powm+0x228>
+   9cfc2:	e8 39 cd f6 ff       	call   9d00 <__stack_chk_fail@plt>
+   9cfc7:	48 8d 0d 72 29 04 00 	lea    0x42972(%rip),%rcx        # df940 <__PRETTY_FUNCTION__.4652>
+   9cfce:	ba 91 00 00 00       	mov    $0x91,%edx
+   9cfd3:	48 8d 35 2d 4d 02 00 	lea    0x24d2d(%rip),%rsi        # c1d07 <_IO_stdin_used+0x8d07>
+   9cfda:	48 8d 3d 3b 4d 02 00 	lea    0x24d3b(%rip),%rdi        # c1d1c <_IO_stdin_used+0x8d1c>
+   9cfe1:	e8 da cd f6 ff       	call   9dc0 <__assert_fail@plt>
+   9cfe6:	48 8d 0d 53 29 04 00 	lea    0x42953(%rip),%rcx        # df940 <__PRETTY_FUNCTION__.4652>
+   9cfed:	ba 85 00 00 00       	mov    $0x85,%edx
+   9cff2:	48 8d 35 0e 4d 02 00 	lea    0x24d0e(%rip),%rsi        # c1d07 <_IO_stdin_used+0x8d07>
+   9cff9:	48 8d 3d 11 4d 02 00 	lea    0x24d11(%rip),%rdi        # c1d11 <_IO_stdin_used+0x8d11>
+   9d000:	e8 bb cd f6 ff       	call   9dc0 <__assert_fail@plt>
+   9d005:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+   9d00c:	00 00 00 
+   9d00f:	90                   	nop
+
+000000000009d010 <mpi_mulpowm>:
+   9d010:	f3 0f 1e fa          	endbr64
+   9d014:	41 57                	push   %r15
+   9d016:	41 56                	push   %r14
+   9d018:	41 55                	push   %r13
+   9d01a:	41 54                	push   %r12
+   9d01c:	55                   	push   %rbp
+   9d01d:	53                   	push   %rbx
+   9d01e:	48 83 ec 48          	sub    $0x48,%rsp
+   9d022:	48 83 3e 00          	cmpq   $0x0,(%rsi)
+   9d026:	48 89 74 24 38       	mov    %rsi,0x38(%rsp)
+   9d02b:	0f 84 b2 02 00 00    	je     9d2e3 <mpi_mulpowm+0x2d3>
+   9d031:	48 89 fd             	mov    %rdi,%rbp
+   9d034:	49 89 d6             	mov    %rdx,%r14
+   9d037:	49 89 cc             	mov    %rcx,%r12
+   9d03a:	31 db                	xor    %ebx,%ebx
+   9d03c:	48 8d 46 08          	lea    0x8(%rsi),%rax
+   9d040:	48 83 c0 08          	add    $0x8,%rax
+   9d044:	89 da                	mov    %ebx,%edx
+   9d046:	83 c3 01             	add    $0x1,%ebx
+   9d049:	48 83 78 f8 00       	cmpq   $0x0,-0x8(%rax)
+   9d04e:	75 f0                	jne    9d040 <mpi_mulpowm+0x30>
+   9d050:	49 8b 3e             	mov    (%r14),%rdi
+   9d053:	89 14 24             	mov    %edx,(%rsp)
+   9d056:	45 31 ed             	xor    %r13d,%r13d
+   9d059:	c7 44 24 20 00 00 00 	movl   $0x0,0x20(%rsp)
+   9d060:	00 
+   9d061:	48 85 ff             	test   %rdi,%rdi
+   9d064:	0f 84 98 02 00 00    	je     9d302 <mpi_mulpowm+0x2f2>
+   9d06a:	89 5c 24 08          	mov    %ebx,0x8(%rsp)
+   9d06e:	31 db                	xor    %ebx,%ebx
+   9d070:	e8 bb db ff ff       	call   9ac30 <mpi_get_nbits>
+   9d075:	45 89 ef             	mov    %r13d,%r15d
+   9d078:	39 c3                	cmp    %eax,%ebx
+   9d07a:	0f 4c d8             	cmovl  %eax,%ebx
+   9d07d:	49 83 c5 01          	add    $0x1,%r13
+   9d081:	4b 8b 3c ee          	mov    (%r14,%r13,8),%rdi
+   9d085:	48 85 ff             	test   %rdi,%rdi
+   9d088:	75 e6                	jne    9d070 <mpi_mulpowm+0x60>
+   9d08a:	89 5c 24 20          	mov    %ebx,0x20(%rsp)
+   9d08e:	89 d8                	mov    %ebx,%eax
+   9d090:	8b 5c 24 08          	mov    0x8(%rsp),%ebx
+   9d094:	44 39 3c 24          	cmp    %r15d,(%rsp)
+   9d098:	0f 85 64 02 00 00    	jne    9d302 <mpi_mulpowm+0x2f2>
+   9d09e:	85 c0                	test   %eax,%eax
+   9d0a0:	0f 84 9a 02 00 00    	je     9d340 <mpi_mulpowm+0x330>
+   9d0a6:	83 fb 09             	cmp    $0x9,%ebx
+   9d0a9:	0f 8f b0 02 00 00    	jg     9d35f <mpi_mulpowm+0x34f>
+   9d0af:	89 d9                	mov    %ebx,%ecx
+   9d0b1:	b8 01 00 00 00       	mov    $0x1,%eax
+   9d0b6:	bb 01 00 00 00       	mov    $0x1,%ebx
+   9d0bb:	d3 e0                	shl    %cl,%eax
+   9d0bd:	48 63 f8             	movslq %eax,%rdi
+--
+000000000009e2e0 <mpihelp_divrem>:
+   9e2e0:	f3 0f 1e fa          	endbr64
+   9e2e4:	41 57                	push   %r15
+   9e2e6:	41 56                	push   %r14
+   9e2e8:	41 55                	push   %r13
+   9e2ea:	41 89 cd             	mov    %ecx,%r13d
+   9e2ed:	41 54                	push   %r12
+   9e2ef:	55                   	push   %rbp
+   9e2f0:	53                   	push   %rbx
+   9e2f1:	48 83 ec 68          	sub    $0x68,%rsp
+   9e2f5:	89 74 24 58          	mov    %esi,0x58(%rsp)
+   9e2f9:	48 89 d6             	mov    %rdx,%rsi
+   9e2fc:	48 89 7c 24 18       	mov    %rdi,0x18(%rsp)
+   9e301:	41 83 f9 01          	cmp    $0x1,%r9d
+   9e305:	0f 84 05 05 00 00    	je     9e810 <mpihelp_divrem+0x530>
+   9e30b:	45 89 cc             	mov    %r9d,%r12d
+   9e30e:	41 83 f9 02          	cmp    $0x2,%r9d
+   9e312:	0f 84 c0 02 00 00    	je     9e5d8 <mpihelp_divrem+0x2f8>
+   9e318:	45 85 c9             	test   %r9d,%r9d
+   9e31b:	0f 84 af 02 00 00    	je     9e5d0 <mpihelp_divrem+0x2f0>
+   9e321:	48 c7 44 24 30 00 00 	movq   $0x0,0x30(%rsp)
+   9e328:	00 00 
+   9e32a:	89 c8                	mov    %ecx,%eax
+   9e32c:	44 29 c8             	sub    %r9d,%eax
+   9e32f:	48 98                	cltq
+   9e331:	48 8d 3c c2          	lea    (%rdx,%rax,8),%rdi
+   9e335:	49 63 c1             	movslq %r9d,%rax
+   9e338:	48 c1 e0 03          	shl    $0x3,%rax
+   9e33c:	48 8d 70 f8          	lea    -0x8(%rax),%rsi
+   9e340:	48 89 44 24 40       	mov    %rax,0x40(%rsp)
+   9e345:	49 8b 6c 00 f8       	mov    -0x8(%r8,%rax,1),%rbp
+   9e34a:	48 8d 58 f0          	lea    -0x10(%rax),%rbx
+   9e34e:	4d 8b 7c 00 f0       	mov    -0x10(%r8,%rax,1),%r15
+   9e353:	48 8d 04 37          	lea    (%rdi,%rsi,1),%rax
+   9e357:	48 89 74 24 48       	mov    %rsi,0x48(%rsp)
+   9e35c:	4c 8b 10             	mov    (%rax),%r10
+   9e35f:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
+   9e364:	4c 39 d5             	cmp    %r10,%rbp
+   9e367:	0f 86 b7 06 00 00    	jbe    9ea24 <mpihelp_divrem+0x744>
+   9e36d:	44 03 6c 24 58       	add    0x58(%rsp),%r13d
+   9e372:	45 29 e5             	sub    %r12d,%r13d
+   9e375:	41 83 ed 01          	sub    $0x1,%r13d
+   9e379:	0f 88 f4 01 00 00    	js     9e573 <mpihelp_divrem+0x293>
+   9e37f:	48 89 e8             	mov    %rbp,%rax
+   9e382:	4d 63 f5             	movslq %r13d,%r14
+   9e385:	49 89 fd             	mov    %rdi,%r13
+   9e388:	4c 89 ff             	mov    %r15,%rdi
+   9e38b:	48 c1 e8 20          	shr    $0x20,%rax
+   9e38f:	44 89 64 24 28       	mov    %r12d,0x28(%rsp)
+   9e394:	48 89 44 24 38       	mov    %rax,0x38(%rsp)
+   9e399:	4c 89 f8             	mov    %r15,%rax
+   9e39c:	49 89 ef             	mov    %rbp,%r15
+   9e39f:	48 89 fd             	mov    %rdi,%rbp
+   9e3a2:	48 c1 e8 20          	shr    $0x20,%rax
+   9e3a6:	4c 89 44 24 20       	mov    %r8,0x20(%rsp)
+   9e3ab:	48 89 44 24 50       	mov    %rax,0x50(%rsp)
+   9e3b0:	41 8d 44 24 fe       	lea    -0x2(%r12),%eax
+   9e3b5:	4d 89 f4             	mov    %r14,%r12
+   9e3b8:	89 44 24 5c          	mov    %eax,0x5c(%rsp)
+   9e3bc:	4c 89 d0             	mov    %r10,%rax
+   9e3bf:	eb 58                	jmp    9e419 <mpihelp_divrem+0x139>
+   9e3c1:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+   9e3c8:	8b 54 24 28          	mov    0x28(%rsp),%edx
+   9e3cc:	48 8b 74 24 20       	mov    0x20(%rsp),%rsi
+   9e3d1:	4c 89 f1             	mov    %r14,%rcx
+   9e3d4:	4c 89 ef             	mov    %r13,%rdi
+   9e3d7:	e8 e4 23 00 00       	call   a07c0 <mpihelp_submul_1>
+   9e3dc:	48 39 44 24 10       	cmp    %rax,0x10(%rsp)
+   9e3e1:	74 18                	je     9e3fb <mpihelp_divrem+0x11b>
+   9e3e3:	8b 4c 24 28          	mov    0x28(%rsp),%ecx
+   9e3e7:	48 8b 54 24 20       	mov    0x20(%rsp),%rdx
+   9e3ec:	4c 89 ee             	mov    %r13,%rsi
+   9e3ef:	4c 89 ef             	mov    %r13,%rdi
+   9e3f2:	49 83 ee 01          	sub    $0x1,%r14
+   9e3f6:	e8 85 24 00 00       	call   a0880 <mpihelp_add_n>
+   9e3fb:	48 8b 44 24 18       	mov    0x18(%rsp),%rax
+   9e400:	4e 89 34 e0          	mov    %r14,(%rax,%r12,8)
+   9e404:	48 8b 44 24 08       	mov    0x8(%rsp),%rax
+   9e409:	49 83 ec 01          	sub    $0x1,%r12
+   9e40d:	48 8b 00             	mov    (%rax),%rax
+   9e410:	45 85 e4             	test   %r12d,%r12d
+   9e413:	0f 88 5a 01 00 00    	js     9e573 <mpihelp_divrem+0x293>
+   9e419:	44 39 64 24 58       	cmp    %r12d,0x58(%rsp)
+   9e41e:	0f 8f 6c 01 00 00    	jg     9e590 <mpihelp_divrem+0x2b0>
+   9e424:	48 8b 74 24 40       	mov    0x40(%rsp),%rsi
+   9e429:	49 83 ed 08          	sub    $0x8,%r13
+   9e42d:	49 8b 74 35 00       	mov    0x0(%r13,%rsi,1),%rsi
+   9e432:	48 89 74 24 10       	mov    %rsi,0x10(%rsp)
+   9e437:	48 8b 74 24 48       	mov    0x48(%rsp),%rsi
+   9e43c:	4c 01 ee             	add    %r13,%rsi
+   9e43f:	48 89 74 24 08       	mov    %rsi,0x8(%rsp)
+   9e444:	49 c7 c6 ff ff ff ff 	mov    $0xffffffffffffffff,%r14
+   9e44b:	49 39 c7             	cmp    %rax,%r15
+   9e44e:	0f 84 74 ff ff ff    	je     9e3c8 <mpihelp_divrem+0xe8>
+   9e454:	31 d2                	xor    %edx,%edx
+   9e456:	44 89 fe             	mov    %r15d,%esi
+   9e459:	48 f7 74 24 38       	divq   0x38(%rsp)
+   9e45e:	49 89 f3             	mov    %rsi,%r11
+   9e461:	4c 0f af d8          	imul   %rax,%r11
+   9e465:	49 89 c2             	mov    %rax,%r10
+   9e468:	48 8b 44 24 08       	mov    0x8(%rsp),%rax
