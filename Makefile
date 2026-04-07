@@ -1,7 +1,8 @@
 # Variables
 CC = gcc
 CFLAGS =
-TARGETS = mul mod sqr spy
+# TARGETS = mul mod sqr spy
+TARGETS = spy
 
 # Default rule (runs when you just type 'make')
 all: $(TARGETS)

@@ -23,8 +23,8 @@ def main():
     mod_file = 'outputs/modulo_output.txt'
 
     threshold = 100
-    plot_start = 0  # change these
-    plot_end = plot_start + 100  # change these
+    plot_start = 615680  # change these
+    plot_end = plot_start + 50  # change these
 
     sqr = parse_file(sqr_file)
     mul = parse_file(mul_file)
