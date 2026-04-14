@@ -1,2 +1,7 @@
 /.venv
 /path
+key_binary.py
+key_raw.bin
+secret.gpg
+key.txt
+secret.txt.asc
