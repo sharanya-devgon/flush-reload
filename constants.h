@@ -7,7 +7,7 @@
 // 000000000009fbc0 T mpihelp_mul_karatsuba_case
 
 #define THRESHOLD 80
-#define MAX_PROBES 1500000m
+#define MAX_PROBES 1500000
 #define BUSY 2250
 
 // #define SQR 0x9f390 
@@ -16,6 +16,6 @@
 
 #define SQR 0x9f3d8   
 #define MUL 0x9fcc0   
-#define DIV 0x9e3c8   
+#define DIV 0x9e3c8
 
 #endif
