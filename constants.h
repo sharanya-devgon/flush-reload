@@ -8,7 +8,7 @@
 
 #define THRESHOLD 80
 #define MAX_PROBES 1500000
-#define BUSY 2250
+#define BUSY 1500
 
 // #define SQR 0x9f390 
 // #define MUL 0x9fbc0
