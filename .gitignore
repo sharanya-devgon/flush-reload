@@ -2,7 +2,6 @@
 /path
 /.kilo
 secret.gpg
-key.txt
 spy_triggered
 spy_triggered.cpp
 spy.cpp

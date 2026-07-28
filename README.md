@@ -16,7 +16,7 @@ Located in `actual_private_key/`:
 - `key.txt` — Private key in binary
 - `secret.txt.asc` — Raw GPG dump from which key bits were extracted
 
-### Key Extraction (`key_extraction/`)
+### Key Extraction (`key_extraction_with_sleep/`)
 
 Multiple rounds of manual and automated key bit extraction:
 
