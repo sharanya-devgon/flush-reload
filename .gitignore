@@ -1,7 +1,10 @@
 /.venv
 /path
-key_binary.py
-key_raw.bin
+/.kilo
 secret.gpg
 key.txt
-secret.txt.asc
+spy_triggered*
+spy.cpp
+spy
+secret.txt
+Makefile

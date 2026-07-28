@@ -1,25 +1,17 @@
-# Variables
+
 CC = gcc
 CFLAGS =
-# TARGETS = mul mod sqr spy
-TARGETS = spy
+TARGETS = spy spy_triggered
 
-# Default rule (runs when you just type 'make')
 all: $(TARGETS)
 
-# Rules for each executable
-# mul: multiply_spy.c constants.h
-# 	$(CC) $(CFLAGS) multiply_spy.c -o mul
+spy: spy2.c constants.h symbol_resolver.h
+	gcc -m32 -O0 spy2.c -o spy
 
-# mod: modulo_spy.c constants.h
-# 	$(CC) $(CFLAGS) modulo_spy.c -o mod
+spy_triggered: spy_triggered.cpp constants.h symbol_resolver.h
+	g++ -m32 -O0 spy_triggered.cpp -o spy_triggered
 
-# sqr: sqr_spy.c constants.h
-# 	$(CC) $(CFLAGS) sqr_spy.c -o sqr
-
-spy: spy.cpp constants.h
-	g++ -O0 spy.cpp -o spy
-
-# Clean rule to remove binaries and output files
 clean:
-	rm -f $(TARGETS) *_output.txt
+	rm -f $(TARGETS) outputs/*
+
+.PHONY: all clean
